@@ -1,0 +1,55 @@
+{
+  "appTitle": "I10n Beispiel",
+
+  "startPage": {
+    "title": "Startseite",
+    "btnOverview": "Zeige Übersetzungsarten",
+    "btnSpecialTranslation": "Zeige Widget-Übersetzung"
+  },
+
+  "overviewPage": {
+    "title": "Übersetzungsarten",
+    "tooltip": "Klicken um den Zähler zu erhöhen",
+
+    "simpleTr": {
+      "dsc": "Eine einfache Übersetzung",
+      "tr": "Klicken Sie auf den Zählerknopf!"
+    },
+    "parametrizedTr": {
+      "dsc": "Eine Übersetzung mit Parameter",
+      "tr": "Sie haben ${count} mal geklickt"
+    },
+    "pluralTr": {
+      "dsc": "Eine Mehrzahlübersetzung",
+
+      "trZero": "Haben Sie Angst den Zählerknopf zu drücken?",
+      "trOne": "Sie haben einmal geklickt",
+      "trTwo": "Sie haben zweimal geklickt",
+      "trOther": "Klicken macht Spass, oder?"
+    },
+    "pluralParamTr": {
+      "dsc": "Eine Mehrzahlübersetzung mit Zusatzparameter",
+
+      "trZero": "Sie haben den Knopf nie gedrückt",
+      "trOne": "Sie haben ihn einmal gedrückt",
+      "trTwo": "Sie haben ihn zweimal gedrückt",
+      "trOther": "Sie haben ihn ${count} mal gedrückt"
+    },
+    "genderTr": {
+      "dsc": "Eine geschlechtsabhängige Übersetzung",
+
+      "trMale": "Ich bin männlich",
+      "trFemale": "Ich bin weiblich",
+      "trOther": "Kann mich gar nicht Entscheiden..."
+    }
+  },
+
+  "directTranslPage": {
+    "title": "Zitatübersetzer",
+    "descr": "Überstzen in eine beliebige Sprache",
+    "de": "Deutsch",
+    "de_CH": "Schweizerdeutsch",
+    "en": "Englisch",
+    "quote": "Dies ist kein Liebeslied"
+  }
+}

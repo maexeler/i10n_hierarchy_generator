@@ -1,0 +1,60 @@
+{
+  "appTitle": "I10n Demo",
+  "@appTitle_1": "This is a comment for the key 'appTitle'",
+  "@appTitle_2": "This is an other comment for the key 'appTitle'",
+  "@appTitle_3": {
+    "it_doesNot_matter": "what's in a ${comment value}"
+  },
+
+  "startPage": {
+    "title": "Start Page",
+    "btnOverview": "Show translation types",
+    "btnSpecialTranslation": "Single widget translation"
+  },
+
+  "overviewPage": {
+    "title": "Translation Types",
+    "tooltip": "Click to increment the counter",
+
+    "simpleTr": {
+      "dsc": "A simple translation",
+      "tr": "Click the increment button!"
+    },
+    "parametrizedTr": {
+      "dsc": "A parametrized translation",
+      "tr": "You earned ${count} $"
+    },
+    "pluralTr": {
+      "dsc": "A plural translation",
+
+      "trZero": "Are you afraid to click the button?",
+      "trOne": "You clicked once",
+      "trTwo": "You clicked twice",
+      "trOther": "Clicking is fun, isn't it?"
+    },
+    "pluralParamTr": {
+      "dsc": "A plural translation with parameter",
+
+      "trZero": "You haven't clicked the button yet",
+      "trOne": "You clicked it once",
+      "trTwo": "You clicked it twice",
+      "trOther": "You clicked it ${count} times"
+    },
+    "genderTr": {
+      "dsc": "A gender translation",
+
+      "trMale": "I am a male",
+      "trFemale": "I am a female",
+      "trOther": "I am still searching my way..."
+    }
+  },
+
+  "directTranslPage": {
+    "title": "Translate the quote",
+    "descr": "Translate a single widget to another language",
+    "de": "German",
+    "de_CH": "Swiss German",
+    "en": "English",
+    "quote": "This is not a love song"
+  }
+}

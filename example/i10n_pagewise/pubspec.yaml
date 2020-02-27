@@ -1,0 +1,25 @@
+name: i10n_pagewise
+description: Shows how to localize your app with the i10n_hierarchy_generator
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # i10n : Flutter needs that
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  # i10n : run
+  # flutter packages pub run i10n_hierarchy_generator --watch
+  # in a console for code generation
+  i10n_hierarchy_generator:
+    path: ../../../i10n_hierarchy_generator
+
+
+flutter:
+  uses-material-design: true
