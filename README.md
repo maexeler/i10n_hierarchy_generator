@@ -65,7 +65,7 @@ You get the file **messages.arb** in the package **res/translations** and the fi
 - Open **messages.arb** and add the following content:
 ```
     {
-      "appTitle": "I10n Demo",
+      "appTitle": "I10n Demo"
     }
 ```
 
@@ -79,7 +79,7 @@ You get the file **messages.arb** in the package **res/translations** and the fi
 <pre style="margin-left: 0px;">
 
 <b>// i10n : import the generated localisation class and the flutter support package
-import './src/generated/i10n_hierarchy.dart'
+import './src/generated/i10n_hierarchy.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';</b>
 
 void main() => runApp(MyApp());
@@ -100,7 +100,7 @@ class MyApp extends StatelessWidget {
       onGenerateTitle: (context) => S.of(context).appTitle,</b>
 
       home: StartPage(),
-      theme: ThemeData(primarySwatch: Colors.purple,), // Your girl friend will like that :-)
+      theme: ThemeData(primarySwatch: Colors.blue,)
     );
   }
 }
@@ -157,7 +157,7 @@ Note: Dollar signs without braces are just $ signs.
 
 ### Plural translations
 Plural translations provide keys for quantities.
-To define a plural translation yo need at least one key which ends with 'Other'.  
+To define a plural translation you need at least one key which ends with 'Other'.  
 You can then provide additional quantities by defining key/value pairs with
 the same key, suffixed by one of the following identifiers:
 - Zero, One, Two, Few, Many
