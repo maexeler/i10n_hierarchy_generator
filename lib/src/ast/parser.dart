@@ -44,10 +44,10 @@ class Parser {
         parent.addPluralNode(key, value, language); }
       else { // key must be a simpleKey
         // Now dispatch by value
-        if (_isSimpleValue(value))
-          parent.addSimpleNode(key, value, language);
-        else if (_isParametrizedValue(value))
-          parent.addParametrizedNode(key, value, language);
+        if (_isSimpleValue(value)) {
+          parent.addSimpleNode(key, value, language); }
+        else if (_isParametrizedValue(value)) {
+          parent.addParametrizedNode(key, value, language); }
         else {
           CompoundNode subNode = CompoundNode(key, parent);
           parent.addCompoundNode(_parseItems(subNode, value, language));

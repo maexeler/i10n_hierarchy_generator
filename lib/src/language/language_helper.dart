@@ -19,14 +19,14 @@ class LanguageWithParent {
   String get prefixParent => _parent.prefix;
 
   String get extendsClass =>
-    _parent.isUndefined ? '' : 'extends ${_parent.prefix}';
+      _parent.isUndefined ? '' : 'extends ${_parent.prefix}';
 
+  LanguageWithParent({String language, String parent})
+      : this._parent = LocaleInfo(parent),
+        this._language = LocaleInfo(language);
 
-  LanguageWithParent({String language, String parent}):
-      this._parent = LocaleInfo(parent),
-      this._language = LocaleInfo(language);
-
-  @override String toString() {
+  @override
+  String toString() {
     return '($language, $parent)';
   }
 }
@@ -37,9 +37,10 @@ class LanguageHierarchy {
   Set<LanguageWithParent> _entries;
   final LanguageWithParent _defaultLanguage;
 
-  LanguageHierarchy() :
-      _entries = Set() ,
-      _defaultLanguage = LanguageWithParent(language: defaultLanguage, parent: null) {
+  LanguageHierarchy()
+      : _entries = Set(),
+        _defaultLanguage =
+            LanguageWithParent(language: defaultLanguage, parent: null) {
     _entries.add(_defaultLanguage);
   }
 
@@ -55,7 +56,8 @@ class LanguageHierarchy {
     LocaleInfo localeInfo = LocaleInfo(language);
     _establish(localeInfo.languageCode, defaultLanguage);
     if (localeInfo.hasCountryCode) {
-      String lngCountry = '${localeInfo.languageCode}_${localeInfo.countryCode}';
+      String lngCountry =
+          '${localeInfo.languageCode}_${localeInfo.countryCode}';
       _establish(lngCountry, localeInfo.languageCode);
       if (localeInfo.hasVariant) {
         String lngCountryVar = '${lngCountry}_${localeInfo.variant}';
@@ -71,12 +73,10 @@ class LanguageHierarchy {
   }
 
   void _establish(String language, String parent) {
-    _entries.firstWhere((element) => element.language == language,
-      orElse: () {
-        _entries.add(LanguageWithParent(language: language, parent: parent));
-        return null;
-      }
-    );
+    _entries.firstWhere((element) => element.language == language, orElse: () {
+      _entries.add(LanguageWithParent(language: language, parent: parent));
+      return null;
+    });
   }
 }
 
@@ -99,7 +99,7 @@ class LocaleInfo {
     return tag.toString();
   }
 
-  String get prefix =>  isUndefined ? '' : '\$${language}_';
+  String get prefix => isUndefined ? '' : '\$${language}_';
 
   String _languageCode;
   String _countryCode;
@@ -112,16 +112,22 @@ class LocaleInfo {
     }
 
     List<String> split = tag.split(delimiter);
-    String lng = languageCodeTranslated(split[0]); // Locale(split[0]).languageCode;
+    String lng =
+        languageCodeTranslated(split[0]); // Locale(split[0]).languageCode;
     _languageCode = lng ?? split[0];
-    if (split.length > 1) {_countryCode = split[1]; }
-    if (split.length > 2) {_variant = split[2]; }
+    if (split.length > 1) {
+      _countryCode = split[1];
+    }
+    if (split.length > 2) {
+      _variant = split[2];
+    }
   }
 
   bool operator ==(other) => language == other.language;
   int get hashCode => language.hashCode;
 
-  @override String toString() {
+  @override
+  String toString() {
     return '($languageCode, $countryCode, $variant)';
   }
 }

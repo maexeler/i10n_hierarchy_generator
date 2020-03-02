@@ -1,6 +1,6 @@
 name: i10n_hierarchy_generator
-description: command-line app
-version: 1.0.0
+description: This is a command-line app to generate a translation class with values provided in messages.arb files.
+version: 1.0.1
 author: Max Werner <max.maexeler@gmail.com>
 homepage: https://maexeler.github.io/
 

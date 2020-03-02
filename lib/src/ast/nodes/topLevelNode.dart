@@ -13,10 +13,11 @@ class TopLevelNode extends CompoundNode {
   LanguageHierarchy _languageHierarchy = LanguageHierarchy();
 
   TopLevelNode(String key, String language) : super(key, null) {
-   _languageHierarchy.add(language);
+    _languageHierarchy.add(language);
   }
 
-  @override String get qualifiedClassName => '';
+  @override
+  String get qualifiedClassName => '';
 
   void mergeWith(TopLevelNode other) {
     _languageHierarchy.merge(other._languageHierarchy);
@@ -30,15 +31,12 @@ class TopLevelNode extends CompoundNode {
   }
 
   String generateCode() {
-    TopLevelLanguageTree topLevelTree =
-    TopLevelLanguageTree(
-      CompoundNode.generateOutputTree(this, _languageHierarchy.defLanguage)
-    );
+    TopLevelLanguageTree topLevelTree = TopLevelLanguageTree(
+        CompoundNode.generateOutputTree(this, _languageHierarchy.defLanguage));
     for (LanguageWithParent language in _languageHierarchy.languages) {
       if (language.isDefaultLanguage) continue;
       topLevelTree.addTree(
-        CompoundNode.generateOutputTree(this, language),
-        language.language);
+          CompoundNode.generateOutputTree(this, language), language.language);
     }
     return topLevelTree.asCode();
   }
