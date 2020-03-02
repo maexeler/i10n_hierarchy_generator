@@ -21,8 +21,9 @@ class TopLevelLanguageTree {
     // the references to the sub-translations
     out.write(headerPart);
     // output the language map for S.forLanguage(String language)
-    for (String language in languages)
+    for (String language in languages) {
       out.writeln("    '$language': () => \$${language}_(),");
+    }
     out.writeln('  };');
     out.writeln();
 
@@ -54,7 +55,6 @@ class TopLevelLanguageTree {
     }
     out.write(footerPart2);
     for (String language in languages) {
-      LocaleInfo li = LocaleInfo(language);
       String casePart = '''
       case "$language":
         S.current = \$${language}_();

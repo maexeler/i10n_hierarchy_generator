@@ -91,7 +91,7 @@ Future<void> main(List<String> arguments) async {
     module.watch;
     await completer.future;
 
-    sub.cancel();
+    await sub.cancel();
   }
 
   module.dispose();

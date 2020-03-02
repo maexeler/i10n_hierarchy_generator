@@ -7,26 +7,27 @@ import 'package:i10n_hierarchy_generator/src/code_generation/output_tree.dart';
 class CompoundNode extends TranslationNode {
   List<CompoundNode> get compoundNodes => _compoundNodes;
 
-  CompoundNode(String key, CompoundNode parent) :
-    _simpleNodes = SimpleNodes(),
-    _pluralNodes = PluralNodes(),
-    _commentNodes = CommentNodes(),
-    _compoundNodes = [],
-    _parametrizedNodes = ParametrizedNodes(),
-    _textDirection = {},
-    super(key, parent);
+  CompoundNode(String key, CompoundNode parent)
+      : _simpleNodes = SimpleNodes(),
+        _pluralNodes = PluralNodes(),
+        _commentNodes = CommentNodes(),
+        _compoundNodes = [],
+        _parametrizedNodes = ParametrizedNodes(),
+        _textDirection = {},
+        super(key, parent);
 
   void addCommentNode(String key, value, String language) {
     // Check for meta information
-  if (key == '@@textDirectionLtr') {
-      addTextDirection(language, true); }
-    else if (key == '@@textDirectionRtl') {
-      addTextDirection(language, false); }
+    if (key == '@@textDirectionLtr') {
+      addTextDirection(language, true);
+    } else if (key == '@@textDirectionRtl') {
+      addTextDirection(language, false);
+    }
 
     // Otherwise add it as comment
     else {
-    key = key.split('_')[0];
-    _commentNodes.add(key.substring(1), value, language);
+      key = key.split('_')[0];
+      _commentNodes.add(key.substring(1), value, language);
     }
   }
 
@@ -67,10 +68,10 @@ class CompoundNode extends TranslationNode {
   }
 
   bool getTextDirection(String language) =>
-    _textDirection.containsKey(language) ? _textDirection[language] : true;
+      _textDirection.containsKey(language) ? _textDirection[language] : true;
 
-  bool hasTextDirection(String  language) =>
-    _textDirection.containsKey(language);
+  bool hasTextDirection(String language) =>
+      _textDirection.containsKey(language);
 
   // Private implementation
   SimpleNodes _simpleNodes;
@@ -81,20 +82,22 @@ class CompoundNode extends TranslationNode {
   Map<String, bool> _textDirection;
 
   static LanguageTree generateOutputTree(
-    CompoundNode fromNode,
-    LanguageWithParent langParent)
-  {
+      CompoundNode fromNode, LanguageWithParent langParent) {
     LanguageTree outputTree =
-      LanguageTree(fromNode.key, fromNode.qualifiedClassName, langParent);
+        LanguageTree(fromNode.key, fromNode.qualifiedClassName, langParent);
     String language = langParent.language;
 
     if (fromNode.hasTextDirection(language)) {
       outputTree.textDirectionLeftToRight = fromNode.getTextDirection(language);
     }
-    outputTree.addComments(fromNode._commentNodes.getTranslationsForLanguage(language));
-    outputTree.addTranslations(fromNode._simpleNodes.getTranslationsForLanguage(language));
-    outputTree.addTranslations(fromNode._pluralNodes.getTranslationsForLanguage(language));
-    outputTree.addTranslations(fromNode._parametrizedNodes.getTranslationsForLanguage(language));
+    outputTree.addComments(
+        fromNode._commentNodes.getTranslationsForLanguage(language));
+    outputTree.addTranslations(
+        fromNode._simpleNodes.getTranslationsForLanguage(language));
+    outputTree.addTranslations(
+        fromNode._pluralNodes.getTranslationsForLanguage(language));
+    outputTree.addTranslations(
+        fromNode._parametrizedNodes.getTranslationsForLanguage(language));
 
     fromNode._compoundNodes.forEach((node) {
       outputTree.addSubNode(generateOutputTree(node, langParent));
@@ -105,8 +108,8 @@ class CompoundNode extends TranslationNode {
 }
 
 abstract class Nodes<T extends Translation> {
-
-  bool hasLeaveNodes(String language) => _getKeysForLanguage(language).isNotEmpty;
+  bool hasLeaveNodes(String language) =>
+      _getKeysForLanguage(language).isNotEmpty;
 
   void add(String key, value, String language);
 
@@ -115,8 +118,7 @@ abstract class Nodes<T extends Translation> {
 
     for (var otherItem in other._translations) {
       if (keyLanguage.containsKey(otherItem.key) &&
-         !keyLanguage[otherItem.key].contains(otherItem.language)
-      ) {
+          !keyLanguage[otherItem.key].contains(otherItem.language)) {
         _translations.add(otherItem);
       }
     }
@@ -125,7 +127,9 @@ abstract class Nodes<T extends Translation> {
   Map<String, Set<String>> _getKeyLanguage() {
     Map<String, Set<String>> keyLanguage = {};
     for (var value in _translations) {
-      if (!keyLanguage.containsKey(value.key)) { keyLanguage[value.key] = Set(); }
+      if (!keyLanguage.containsKey(value.key)) {
+        keyLanguage[value.key] = Set();
+      }
       keyLanguage[value.key].add(value.language);
     }
     return keyLanguage;
@@ -148,40 +152,41 @@ abstract class Nodes<T extends Translation> {
     Set<String> defaultLngKeys = _getKeysForLanguage(defaultLanguage);
     Set<String> languageKeys = _getKeysForLanguage(language);
     languageKeys = defaultLngKeys.intersection(defaultLngKeys);
-    return _translations.where((translation) =>
-      languageKeys.contains(translation.key) && translation.language == language
-    ).toList();
+    return _translations
+        .where((translation) =>
+            languageKeys.contains(translation.key) &&
+            translation.language == language)
+        .toList();
   }
 
   Translation getTranslationFor(String key, String language) {
     return _translations.firstWhere(
         (element) => element.key == key && element.language == language,
-        orElse: () => null
-    );
+        orElse: () => null);
   }
 
   List<Translation> _translations = [];
 }
 
 class SimpleNodes extends Nodes<SimpleTranslation> {
-
-  @override void add(String key, value, String language) {
+  @override
+  void add(String key, value, String language) {
     _translations.add(SimpleTranslation(language, key, value));
   }
 }
 
 class PluralNodes extends Nodes<PluralTranslation> {
-
   /// Add a new PluralTranslation
   ///
   /// If there already exists one with the same key and language,
   /// add the translation to this node, otherwise insert it into the list.
   void add(String key, value, String language) {
     var pluralTranslation = PluralTranslation(language, key, value);
-    var keyTranslations = _translations.where((translation) =>
-      translation.key == pluralTranslation.key &&
-      translation.language == pluralTranslation.language
-    ).toList();
+    var keyTranslations = _translations
+        .where((translation) =>
+            translation.key == pluralTranslation.key &&
+            translation.language == pluralTranslation.language)
+        .toList();
     if (keyTranslations.isEmpty) {
       _translations.add(pluralTranslation);
     } else {
@@ -193,13 +198,15 @@ class PluralNodes extends Nodes<PluralTranslation> {
 }
 
 class CommentNodes extends Nodes<CommentTranslation> {
-  @override void add(String key, value, String language) {
+  @override
+  void add(String key, value, String language) {
     _translations.add(CommentTranslation(language, key, value));
   }
 }
 
 class ParametrizedNodes extends Nodes<ParametrizedTranslation> {
-  @override void add(String key, value, String language) {
+  @override
+  void add(String key, value, String language) {
     _translations.add(ParametrizedTranslation(language, key, value));
   }
 }

@@ -1,4 +1,3 @@
-
 const String headerPart = '''
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +29,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     return <Locale>[
 ''';
 
-const String footerPart2 =
-'''    ];
+const String footerPart2 = '''    ];
   }
 
   LocaleListResolutionCallback listResolution({Locale fallback, bool withCountry = true}) {
