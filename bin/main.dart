@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:path/path.dart';
 
-import 'package:i10n_hierarchy_generator/i10n_module.dart';
+import 'package:i10n_hierarchy_generator/i10n_hierarchy_generator.dart';
 
 const String sourceKey = 'source';
 const String sourceDefault = './res/translations';

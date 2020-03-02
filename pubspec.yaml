@@ -1,8 +1,8 @@
 name: i10n_hierarchy_generator
 description: command-line app
-version: 0.0.1
-author:
-homepage:
+version: 1.0.0
+author: Max Werner <max.maexeler@gmail.com>
+homepage: https://maexeler.github.io/
 
 
 environment:
