@@ -24,8 +24,9 @@ class TopLevelNode extends CompoundNode {
 
     for (var lngParent in other._languageHierarchy.languages) {
       String language = lngParent.language;
-      if (other.hasTextDirection(language))
+      if (other.hasTextDirection(language)) {
         addTextDirection(language, other.getTextDirection(language));
+      }
     }
     merge(other);
   }

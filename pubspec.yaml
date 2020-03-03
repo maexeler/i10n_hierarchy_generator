@@ -1,6 +1,6 @@
 name: i10n_hierarchy_generator
 description: Translate a Flutter application in an easy, structured and time proven way.
-version: 1.0.2
+version: 1.0.3
 author: Max Werner <max.maexeler@gmail.com>
 homepage: https://github.com/maexeler/i10n_hierarchy_generator
 

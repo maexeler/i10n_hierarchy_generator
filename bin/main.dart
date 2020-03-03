@@ -20,7 +20,6 @@ const String createPathsKey = 'create-paths';
 const bool createPathsKeyDefault = true;
 
 Future<void> main(List<String> arguments) async {
-
   final ArgParser parser = ArgParser()
     ..addOption(
       sourceKey,
@@ -40,9 +39,9 @@ Future<void> main(List<String> arguments) async {
       watchKey,
       abbr: 'w',
       help: 'Whether you want to listen for file changes.\n'
-        'NOTE: Keep in mind that the changes are detected when the file is\n'
-        'saved after modification. So if you use an IDE make sure to save\n'
-        'the arb file so that the dart files are updated.',
+          'NOTE: Keep in mind that the changes are detected when the file is\n'
+          'saved after modification. So if you use an IDE make sure to save\n'
+          'the arb file so that the dart files are updated.',
       defaultsTo: watchDefault,
     )
     ..addFlag(
@@ -84,9 +83,9 @@ Future<void> main(List<String> arguments) async {
   if (watch) {
     final Completer<void> completer = Completer<void>();
     final StreamSubscription<String> sub = stdin //
-      .transform(utf8.decoder)
-      .transform(const LineSplitter())
-      .listen((String args) => args == 'x' ? completer.complete() : null);
+        .transform(utf8.decoder)
+        .transform(const LineSplitter())
+        .listen((String args) => args == 'x' ? completer.complete() : null);
 
     module.watch;
     await completer.future;

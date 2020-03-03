@@ -77,7 +77,7 @@ class LanguageTree {
   String _textDirection;
   bool get hasTextDirection => _textDirection != null;
   set textDirectionLeftToRight(bool dirIsLeftToRight) =>
-    _textDirection = dirIsLeftToRight ? 'ltr' : 'rtl';
+      _textDirection = dirIsLeftToRight ? 'ltr' : 'rtl';
 
   List<LanguageTree> _subNodes = [];
   final List<Translation> _comments = [];
@@ -85,7 +85,8 @@ class LanguageTree {
 
   void addSubNode(LanguageTree node) => _subNodes.add(node);
   void addComments(List<Translation> comments) => _comments.addAll(comments);
-  void addTranslations(List<Translation> translations) => _translations.addAll(translations);
+  void addTranslations(List<Translation> translations) =>
+      _translations.addAll(translations);
 
   bool get hasTranslations => _hasTranslations();
   bool get hasNoTranslations => !hasTranslations;
@@ -98,13 +99,14 @@ class LanguageTree {
     StringBuffer out = StringBuffer();
     if (_textDirection != null) {
       out.writeln(
-        '  @override TextDirection get textDirection => TextDirection.$_textDirection;');
+          '  @override TextDirection get textDirection => TextDirection.$_textDirection;');
       out.writeln();
     }
     bool override = !langParent.isDefaultLanguage;
 
     for (var translation in _translations) {
-      var comments = _comments.where((comment) => comment.key == translation.key);
+      var comments =
+          _comments.where((comment) => comment.key == translation.key);
       for (var comment in comments) {
         out.writeln(comment.asCode(false));
       }
@@ -113,9 +115,9 @@ class LanguageTree {
     return out.toString();
   }
 
-  String generateSubclassReferences()  {
+  String generateSubclassReferences() {
     StringBuffer out = StringBuffer();
-    for(var node in _subNodes) {
+    for (var node in _subNodes) {
       var comments = _comments.where((comment) => comment.key == node.key);
       for (var comment in comments) {
         out.writeln(comment.asCode(false));
@@ -127,10 +129,10 @@ class LanguageTree {
     return out.toString();
   }
 
-  String generateSubclasses()  {
+  String generateSubclasses() {
     StringBuffer out = StringBuffer();
     if (_subNodes.isNotEmpty) out.writeln();
-    for(var node in _subNodes) {
+    for (var node in _subNodes) {
       out.writeln(node.generateCode());
     }
     return out.toString();
@@ -139,9 +141,9 @@ class LanguageTree {
   String generateCode() {
     StringBuffer out = StringBuffer();
     String extendsClass = langParent.isDefaultLanguage
-      ? '' : 'extends ${langParent.prefixParent}$className ';
-    out.writeln(
-      'class ${langParent.prefix}$className $extendsClass{');
+        ? ''
+        : 'extends ${langParent.prefixParent}$className ';
+    out.writeln('class ${langParent.prefix}$className $extendsClass{');
 
     out.write(generateTranslations());
     out.write(generateSubclassReferences());
@@ -151,11 +153,11 @@ class LanguageTree {
   }
 
   void _removeDeadCode() {
-    if(_subNodes.isEmpty) return;
+    if (_subNodes.isEmpty) return;
     for (var node in _subNodes) {
       node._removeDeadCode();
     }
-    for(int i = 0; i < _subNodes.length; ++i) {
+    for (int i = 0; i < _subNodes.length; ++i) {
       if (_subNodes[i].hasNoTranslations) {
         _subNodes[i] = null;
       }
