@@ -1,8 +1,8 @@
 name: i10n_hierarchy_generator
-description: This is a command-line app to generate a translation class with values provided in messages.arb files.
-version: 1.0.1
+description: Translate a Flutter application in an easy, structured and time proven way.
+version: 1.0.2
 author: Max Werner <max.maexeler@gmail.com>
-homepage: https://maexeler.github.io/
+homepage: https://github.com/maexeler/i10n_hierarchy_generator
 
 
 environment:

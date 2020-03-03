@@ -1,14 +1,24 @@
 # i10n_hierarchy_generator
 
 ## What is it?
-**i10n_generator** is a **command-line app** which gets key/value pairs from
+**i10n_generator** is a **command-line app** which helps in translateing
+ a Flutter application in an easy, structured and time proven way.  
+
+ It reads key/value pairs from
  Json message files and generates a class helping you to
- translate your Flutter application.
-
- The Json structure may be hierarchical. You can group your
- translations by page or topic or whatever you like.
-
+ translate your Flutter application.  
+ The Json structure may be hierarchical.  
+ You can group your translations by page or topic or whatever you like.  
  The generated class helps you to find your translation by using code completion.
+
+#### Why I wrote it?
+Localization of an application is not the funnies part of programming.  
+Since I live in Switzerland an we have four official languages here, I did
+a lot of localization in my life. IMHO, the official Flutter way to localize
+an application is much to complicated.  
+So I wrote my own solution.  
+Give it a try. I don't think you will be disappointed.
+
 
 #### What isn't it?
 **i10n_generator** is not a full internationalization package. It supports
@@ -329,7 +339,7 @@ Prepend the key with an underscore and an unique identifier.
 ```
 
 ## Tips and Tricks
-Localization of an application is not the funnies part of programming.  
+As I said earlier, localization of an application is not the funnies part of programming.  
 Since I live in Switzerland an we have four official languages here, I did a lot of localization in my life.
 
 So, what's the best way to do that?
