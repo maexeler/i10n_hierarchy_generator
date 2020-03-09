@@ -41,6 +41,7 @@ class TopLevelLanguageTree {
 
     // After that, output the code for all other translations.
     for (var tree in languageTrees) {
+      defaultLocale = tree.defaultLocale;
       out.write(tree.generateCode());
     }
     out.writeln();
@@ -62,7 +63,24 @@ class TopLevelLanguageTree {
       out.writeln(casePart);
     }
     out.write(footerPart3);
+    out.writeln();
+    out.write('const Locale defaultLocale');
+    if (_hasDefaultLocale()) {
+      out.writeln(' = ${_generateDefaultLocale()};');
+    } else {
+      out.writeln(' = null;');
+    }
     return out.toString();
+  }
+
+  String _defaultLocale;
+  set defaultLocale(String language) => _defaultLocale = language ?? _defaultLocale;
+
+  bool _hasDefaultLocale() => _defaultLocale != null;
+
+  String _generateDefaultLocale() {
+    LocaleInfo localeInfo = LocaleInfo(_defaultLocale);
+    return 'Locale("${localeInfo.languageCode}", "${localeInfo.hasCountryCode ? localeInfo.countryCode : ''}")';
   }
 }
 
@@ -76,6 +94,11 @@ class LanguageTree {
 
   String _textDirection;
   bool get hasTextDirection => _textDirection != null;
+
+  String _defaultLocale;
+  String get defaultLocale => _defaultLocale;
+  set defaultLocale(String language) => _defaultLocale = language;
+
   set textDirectionLeftToRight(bool dirIsLeftToRight) =>
       _textDirection = dirIsLeftToRight ? 'ltr' : 'rtl';
 

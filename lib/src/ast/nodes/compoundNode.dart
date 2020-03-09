@@ -22,6 +22,8 @@ class CompoundNode extends TranslationNode {
       addTextDirection(language, true);
     } else if (key == '@@textDirectionRtl') {
       addTextDirection(language, false);
+    } else if (key == '@@isDefaultLanguage') {
+      defaultLanguage = language;
     }
 
     // Otherwise add it as comment
@@ -73,6 +75,10 @@ class CompoundNode extends TranslationNode {
   bool hasTextDirection(String language) =>
       _textDirection.containsKey(language);
 
+  String get defaultLanguage => _defaultLanguage;
+
+  set defaultLanguage(String language) => _defaultLanguage = language ?? _defaultLanguage;
+
   // Private implementation
   SimpleNodes _simpleNodes;
   PluralNodes _pluralNodes;
@@ -80,6 +86,7 @@ class CompoundNode extends TranslationNode {
   List<CompoundNode> _compoundNodes;
   ParametrizedNodes _parametrizedNodes;
   Map<String, bool> _textDirection;
+  String _defaultLanguage; // null is OK
 
   static LanguageTree generateOutputTree(
       CompoundNode fromNode, LanguageWithParent langParent) {
@@ -90,6 +97,8 @@ class CompoundNode extends TranslationNode {
     if (fromNode.hasTextDirection(language)) {
       outputTree.textDirectionLeftToRight = fromNode.getTextDirection(language);
     }
+    outputTree.defaultLocale = fromNode.defaultLanguage;
+
     outputTree.addComments(
         fromNode._commentNodes.getTranslationsForLanguage(language));
     outputTree.addTranslations(

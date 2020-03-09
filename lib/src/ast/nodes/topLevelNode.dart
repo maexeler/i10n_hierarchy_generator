@@ -28,6 +28,7 @@ class TopLevelNode extends CompoundNode {
         addTextDirection(language, other.getTextDirection(language));
       }
     }
+    this.defaultLanguage = other.defaultLanguage;
     merge(other);
   }
 
