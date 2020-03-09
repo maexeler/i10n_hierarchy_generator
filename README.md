@@ -81,7 +81,9 @@ You get the file **messages.arb** in the package **res/translations** and the fi
 
 - Create the file **messages_en.arb** with the content:
 ```
-    {}
+    {
+      "@@isDefaultLanguage": ""
+    }
 ```
 
 - Now open main.dart and modify your MaterialApp:
@@ -287,7 +289,9 @@ Man I like that. Compound translation are the reason why I wrote this package :s
 ### Meta information
 If you start a key with two @ sings, the key/value pair is interpreted as
 a meta information.  
-At the time being, there ar only to valid meta keys:
+At the time being, there are meta keys for the **text direction** and the **default language**.
+
+#### Text direction:
 - **@@textDirectionLtr** (left to right)
 - **@@textDirectionRtl** (right to left)
 
@@ -300,6 +304,20 @@ your language subclasses will inherit that.
 
     .dart
         @override TextDirection get textDirection => TextDirection.rtl;
+```
+
+#### Default language:
+- **@@isDefaultLanguage**
+
+The language file containing this annotation announces that the contents
+of **messages.arb** contains the translations for this language.
+
+If your default message file contains translation for the english language,
+add a file **messages_en.arb** and fill in the following content:
+```
+  {
+    "@@isDefaultLanguage": ""
+  }
 ```
 
 ### Comments
