@@ -64,7 +64,7 @@ class TopLevelLanguageTree {
     }
     out.write(footerPart3);
     out.writeln();
-    out.write('const Locale defaultLocale');
+    out.write('const Locale _defaultLocale');
     if (_hasDefaultLocale()) {
       out.writeln(' = ${_generateDefaultLocale()};');
     } else {

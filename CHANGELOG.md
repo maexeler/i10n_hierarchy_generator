@@ -14,3 +14,6 @@ Published code on github.
 
 ## [1.0.4]()
 - Added support for the @@isDefaultLanguage annotation.
+
+## [1.0.5]()
+- Changed README.md and example code for the @@isDefaultLanguage annotation.

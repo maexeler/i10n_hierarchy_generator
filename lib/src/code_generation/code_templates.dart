@@ -33,8 +33,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 
 const String footerPart2 = '''    ];
   }
-
-  LocaleListResolutionCallback listResolution({Locale fallback, bool withCountry = true}) {
+  
+  LocaleListResolutionCallback listResolution({Locale fallback = _defaultLocale, bool withCountry = true}) {
     return (List<Locale> locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return _getFallback(fallback, supported.first);
@@ -44,7 +44,7 @@ const String footerPart2 = '''    ];
     };
   }
 
-  LocaleResolutionCallback resolution({Locale fallback, bool withCountry = true}) {
+  LocaleResolutionCallback resolution({Locale fallback = _defaultLocale, bool withCountry = true}) {
     return (Locale locale, Iterable<Locale> supported) {
       return _resolve(locale, fallback, supported, withCountry);
     };
@@ -52,7 +52,7 @@ const String footerPart2 = '''    ];
 
   @override
   Future<S> load(Locale locale) {
-    final String lang = getLang(locale);
+    final String lang = _getLang(locale);
     if (lang != null) {
       switch (lang) {
 ''';
@@ -92,7 +92,7 @@ const String footerPart3 = '''
   }
 
   Locale _getFallback(Locale fallback, Locale firstInList) {
-    return fallback ?? (defaultLocale ?? firstInList);
+    return fallback ?? firstInList;
   }
   
   ///
@@ -121,7 +121,7 @@ const String footerPart3 = '''
   }
 }
 
-String getLang(Locale l) => l == null
+String _getLang(Locale l) => l == null
   ? null
   : l.countryCode != null && l.countryCode.isEmpty
     ? l.languageCode

@@ -102,11 +102,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       <b>// i10n : Prepare App for localization by inserting the following code
       localizationsDelegates: [
-        GeneratedLocalizationsDelegate(),
+        S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: GeneratedLocalizationsDelegate().supportedLocales,
+      supportedLocales: S.delegate.supportedLocales,
+      localeResolutionCallback: S.delegate.resolution(),
 
       // i10n : Use onGenerateTitle: instead of title:
       onGenerateTitle: (context) => S.of(context).appTitle,</b>
@@ -309,8 +310,8 @@ your language subclasses will inherit that.
 #### Default language:
 - **@@isDefaultLanguage**
 
-The language file containing this annotation announces that the contents
-of **messages.arb** contains the translations for this language.
+The language file containing this annotation announces that it contains
+the translations for all languages not defined by you.
 
 If your default message file contains translation for the english language,
 add a file **messages_en.arb** and fill in the following content:
@@ -319,6 +320,14 @@ add a file **messages_en.arb** and fill in the following content:
     "@@isDefaultLanguage": ""
   }
 ```
+Note: Any messages_xx.arb file can carry this annotation. But you should not
+add it to more then one file.
+
+Flutter will only honer your request if you put the line
+```
+    localeResolutionCallback: S.delegate.resolution(),
+```
+in your MaterialApp.
 
 ### Comments
 Comments may be used to clarify what a translation means or to describe

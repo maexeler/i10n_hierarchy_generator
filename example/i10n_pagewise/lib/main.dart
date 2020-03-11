@@ -16,11 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // i10n : Prepare App for localization by inserting the following code
       localizationsDelegates: [
-        GeneratedLocalizationsDelegate(),
+        S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: GeneratedLocalizationsDelegate().supportedLocales,
+      supportedLocales: S.delegate.supportedLocales,
+      localeResolutionCallback: S.delegate.resolution(),
 
       // i10n : Use onGenerateTitle: instead of title:
       onGenerateTitle: (context) => S.of(context).appTitle,
@@ -36,9 +37,10 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // i10n : Use the actual language for the page
     S i10n = S.of(context);
+    Locale actLocale = Localizations.localeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(i10n.startPage.title),
+        title: Text('${i10n.startPage.title} ($actLocale)'),
       ),
       body: Center(
         child: Column(
@@ -75,9 +77,10 @@ class _OverviewPageState extends State<OverviewPage> {
   Widget build(BuildContext context) {
     // i10n : Use the actual language for the page
     S i10n = S.of(context);
+    Locale actLocale = Localizations.localeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(i10n.overviewPage.title),
+        title: Text('${i10n.overviewPage.title} ($actLocale)'),
       ),
       body: Center(
         child: ListView(
@@ -183,9 +186,10 @@ class DirectTranslationState extends State<DirectTranslationPage> {
   Widget build(BuildContext context) {
     // i10n : Use the actual language for the page
     S i10n = S.of(context);
+    Locale actLocale = Localizations.localeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(i10n.directTranslPage.title),
+        title: Text('${i10n.directTranslPage.title} ($actLocale)'),
       ),
       body: Center(
         child: Column(
