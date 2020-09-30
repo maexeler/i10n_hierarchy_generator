@@ -288,7 +288,7 @@ Man I like that. Compound translation are the reason why I wrote this package :s
 ## Oh that's nice, anything else?
 
 ### Meta information
-If you start a key with two @ sings, the key/value pair is interpreted as
+If you start a key with two @ signs, the key/value pair is interpreted as
 a meta information.  
 At the time being, there are meta keys for the **text direction** and the **default language**.
 
