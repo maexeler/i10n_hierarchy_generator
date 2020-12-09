@@ -34,7 +34,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 const String footerPart2 = '''    ];
   }
   
-  LocaleListResolutionCallback listResolution({Locale fallback = _defaultLocale, bool withCountry = true}) {
+  LocaleListResolutionCallback listResolution({Locale fallback = _defaultLocale, bool withCountry = false}) {
     return (List<Locale> locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return _getFallback(fallback, supported.first);
