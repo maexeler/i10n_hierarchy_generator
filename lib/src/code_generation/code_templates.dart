@@ -44,7 +44,7 @@ const String footerPart2 = '''    ];
     };
   }
 
-  LocaleResolutionCallback resolution({Locale fallback = _defaultLocale, bool withCountry = true}) {
+  LocaleResolutionCallback resolution({Locale fallback = _defaultLocale, bool withCountry = false}) {
     return (Locale locale, Iterable<Locale> supported) {
       return _resolve(locale, fallback, supported, withCountry);
     };

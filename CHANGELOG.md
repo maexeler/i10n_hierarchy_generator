@@ -21,3 +21,5 @@ Published code on github.
 ## [1.0.6]()
 - Locale resolution returned the default locale when the country code did not match. It should return the available language locale instead.
 
+## [1.0.7]()
+- Fixed the fix from 1.0.6 😭
