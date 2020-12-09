@@ -17,3 +17,7 @@ Published code on github.
 
 ## [1.0.5]()
 - Changed README.md and example code for the @@isDefaultLanguage annotation.
+
+## [1.0.6]()
+- Locale resolution returned the default locale when the country code did not match. It should return the available language locale instead.
+
