@@ -55,13 +55,6 @@ class TopLevelLanguageTree {
       out.writeln('      Locale("${li.languageCode}", "${countryCode}"),');
     }
     out.write(footerPart2);
-    for (String language in languages) {
-      String casePart = '''
-      case "$language":
-        S.current = \$${language}_();
-        return SynchronousFuture<S>(S.current);''';
-      out.writeln(casePart);
-    }
     out.write(footerPart3);
     out.writeln();
     out.write('const Locale _defaultLocale');
@@ -69,6 +62,13 @@ class TopLevelLanguageTree {
       out.writeln(' = ${_generateDefaultLocale()};');
     } else {
       out.writeln(' = null;');
+    }
+    out.writeln();
+    out.write('final _defaultLanguage = ');
+    if (_hasDefaultLocale()) {
+      out.writeln("\$${_defaultLocale}_();");
+    } else {
+      out.writeln('\$defLang_();');
     }
     return out.toString();
   }

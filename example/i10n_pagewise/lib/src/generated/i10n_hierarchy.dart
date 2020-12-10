@@ -11,7 +11,7 @@ class S implements WidgetsLocalizations {
   static S current;
   static const GeneratedLocalizationsDelegate delegate = GeneratedLocalizationsDelegate();
   static S of(BuildContext context) => Localizations.of<S>(context, S);
-  static S forLanguage(String language) => _langMap.containsKey(language) ? _langMap[language]() : $defLang_();
+  static S forLanguage(String language) => _langMap.containsKey(language) ? _langMap[language]() : _defaultLanguage;
   static Set<String> get languages => _langMap.keys.toSet();
   static Map<String, Function>_langMap = {
     'de': () => $de_(),
@@ -210,7 +210,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     ];
   }
   
-  LocaleListResolutionCallback listResolution({Locale fallback = _defaultLocale, bool withCountry = true}) {
+  LocaleListResolutionCallback listResolution({Locale fallback = _defaultLocale, bool withCountry = false}) {
     return (List<Locale> locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return _getFallback(fallback, supported.first);
@@ -220,7 +220,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     };
   }
 
-  LocaleResolutionCallback resolution({Locale fallback = _defaultLocale, bool withCountry = true}) {
+  LocaleResolutionCallback resolution({Locale fallback = _defaultLocale, bool withCountry = false}) {
     return (Locale locale, Iterable<Locale> supported) {
       return _resolve(locale, fallback, supported, withCountry);
     };
@@ -229,24 +229,9 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
   @override
   Future<S> load(Locale locale) {
     final String lang = _getLang(locale);
-    if (lang != null) {
-      switch (lang) {
-      case "de":
-        S.current = $de_();
-        return SynchronousFuture<S>(S.current);
-      case "de_CH":
-        S.current = $de_CH_();
-        return SynchronousFuture<S>(S.current);
-      case "en":
-        S.current = $en_();
-        return SynchronousFuture<S>(S.current);
-        default:
-          // NO-OP.
-      }
-    }
-    S.current = S();
+    S.current = S.forLanguage(lang);
     return SynchronousFuture<S>(S.current);
-  }
+   }
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale, true);
@@ -278,28 +263,10 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
   }
   
   ///
-  /// Returns true if the specified locale is supported, false otherwise.
+  /// Returns true since we can always provide a translation
   ///
   bool _isSupported(Locale locale, bool withCountry) {
-    if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
-        // Language must always match both locales.
-        if (supportedLocale.languageCode != locale.languageCode) {
-          continue;
-        }
-
-        // If country code matches, return this locale.
-        if (supportedLocale.countryCode == locale.countryCode) {
-          return true;
-        }
-
-        // If no country requirement is requested, check if this locale has no country.
-        if (true != withCountry && (supportedLocale.countryCode == null || supportedLocale.countryCode.isEmpty)) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return true;
   }
 }
 
@@ -310,3 +277,5 @@ String _getLang(Locale l) => l == null
     : l.toString();
 
 const Locale _defaultLocale = Locale("en", "");
+
+final _defaultLanguage = $en_();

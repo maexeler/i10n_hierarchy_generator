@@ -23,3 +23,6 @@ Published code on github.
 
 ## [1.0.7]()
 - Fixed the fix from 1.0.6 😭
+
+## [1.0.8]()
+- Solved the problem with translations in library projects which do not provide all the languages demanded by the main project.

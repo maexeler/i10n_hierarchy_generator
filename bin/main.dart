@@ -47,7 +47,7 @@ Future<void> main(List<String> arguments) async {
     ..addFlag(
       'create-paths',
       abbr: 'c',
-      help: 'This will create the folders structure recursevly.',
+      help: 'This will create the folders structure recursively.',
       defaultsTo: createPathsKeyDefault,
     );
 

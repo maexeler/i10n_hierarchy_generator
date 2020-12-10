@@ -12,7 +12,7 @@ class S implements WidgetsLocalizations {
   static S current;
   static const GeneratedLocalizationsDelegate delegate = GeneratedLocalizationsDelegate();
   static S of(BuildContext context) => Localizations.of<S>(context, S);
-  static S forLanguage(String language) => _langMap.containsKey(language) ? _langMap[language]() : \$defLang_();
+  static S forLanguage(String language) => _langMap.containsKey(language) ? _langMap[language]() : _defaultLanguage;
   static Set<String> get languages => _langMap.keys.toSet();
   static Map<String, Function>_langMap = {
 ''';
@@ -53,18 +53,12 @@ const String footerPart2 = '''    ];
   @override
   Future<S> load(Locale locale) {
     final String lang = _getLang(locale);
-    if (lang != null) {
-      switch (lang) {
+    S.current = S.forLanguage(lang);
+    return SynchronousFuture<S>(S.current);
+   }
 ''';
 
 const String footerPart3 = '''
-        default:
-          // NO-OP.
-      }
-    }
-    S.current = S();
-    return SynchronousFuture<S>(S.current);
-  }
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale, true);
@@ -96,28 +90,10 @@ const String footerPart3 = '''
   }
   
   ///
-  /// Returns true if the specified locale is supported, false otherwise.
+  /// Returns true since we can always provide a translation
   ///
   bool _isSupported(Locale locale, bool withCountry) {
-    if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
-        // Language must always match both locales.
-        if (supportedLocale.languageCode != locale.languageCode) {
-          continue;
-        }
-
-        // If country code matches, return this locale.
-        if (supportedLocale.countryCode == locale.countryCode) {
-          return true;
-        }
-
-        // If no country requirement is requested, check if this locale has no country.
-        if (true != withCountry && (supportedLocale.countryCode == null || supportedLocale.countryCode.isEmpty)) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return true;
   }
 }
 

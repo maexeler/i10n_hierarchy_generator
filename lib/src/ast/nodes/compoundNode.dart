@@ -77,7 +77,8 @@ class CompoundNode extends TranslationNode {
 
   String get defaultLanguage => _defaultLanguage;
 
-  set defaultLanguage(String language) => _defaultLanguage = language ?? _defaultLanguage;
+  set defaultLanguage(String language) =>
+      _defaultLanguage = language ?? _defaultLanguage;
 
   // Private implementation
   SimpleNodes _simpleNodes;
